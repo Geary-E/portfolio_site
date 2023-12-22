@@ -1,0 +1,54 @@
+.App {
+  text-align: center;
+  padding: 30px;
+}
+
+.nav-bar {
+  display: flex;
+  /*flex-flow: row wrap;*/
+  justify-content: center;
+  /*align-items: flex-start;*/
+}
+
+.navbar-list {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  /*background-color: black;
+  color: white;*/
+  width: 100%;
+}
+
+.navbar-list li {
+  padding: 25px;
+}
+
+.navbar-list a {
+  padding: 15px;
+  display: inline;
+  text-decoration: none;
+ /* color: white; */
+}
+
+.navbar-list a:hover {
+  background-color: black;
+  color: white;
+}
+
+.home-image {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 30%;
+  right: 10% 
+}
+
+.typewriter {
+  font-size: 40px;
+  font-weight: bold;
+  position: absolute;
+  top: 40%;
+  left: 10%;
+}
