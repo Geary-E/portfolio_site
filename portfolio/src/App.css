@@ -4,10 +4,18 @@
 }
 
 .nav-bar {
-  display: flex;
+ /* display: flex; */
   /*flex-flow: row wrap;*/
-  justify-content: center;
+ /* justify-content: center; */
   /*align-items: flex-start;*/
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white; /* Add background color to make it visible on the page */
+  z-index: 100; 
 }
 
 .navbar-list {
@@ -20,8 +28,13 @@
 }
 
 .navbar-list li {
-  padding: 25px;
+  padding: 20px;
   cursor: pointer;
+}
+
+.navbar-list li:hover {
+  background-color: black;
+  color: white;
 }
 
 .navbar-list a {
@@ -46,7 +59,7 @@
   height: 300px;
   position: absolute;
   top: 30%;
-  right: 10%; 
+  right: 1%; 
   z-index: 0;
 }
 
@@ -92,15 +105,18 @@
 
 .project-section {
   padding: 20px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+  display: grid;
+  /*flex-flow: row wrap;
+  justify-content: center; */
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px 20px;
 }
 
-.flex-item {
-  flex: 1;
+.grid-item {
+ /* flex: 1; */
   padding: 15px;
-  width: 25%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .skills-section {
@@ -118,8 +134,37 @@
 
 .contact-section {
   padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px 20px;
 }
 
 .contact-items {
-  display: inline-block;
+  padding: 15px;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+
+.project-img {
+  width: 400px;
+  height: 250px;
+}
+
+.font-icons {
+  height: 100px;
+  width: 100px;
+}
+
+.font-icons a:link {
+  color: black;
+}
+
+.font-icons a:visited {
+  color: black;
+}
+
+.font-icons a:link, .font-icons a:visited {
+  text-decoration: none;
+}
+

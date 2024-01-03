@@ -1,9 +1,15 @@
 
 import './App.css';
 import React from 'react';
-import { Link } from 'react-scroll';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faEarthAmericas } from '@fortawesome/free-solid-svg-icons'
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import bgImage from './images/image1.png';
 import profileImage from './images/image2.JPG';
+import firstProject from './images/image3.JPG';
+import secondProject from './images/image4.JPG';
+import thirdProject from './images/image5.JPG';
 import { useRef } from 'react';
 //import ScrollButton from './ScrollButton';
 import Typewriter from 'typewriter-effect';
@@ -46,7 +52,7 @@ function App() {
 /></div>
       </div><br/><br/>
 
-      <div class="sections">
+      <div className="sections">
         
         <div ref={about} className="first-section">
          <h1> About </h1>
@@ -88,20 +94,25 @@ function App() {
           <div ref={projects} className="second-section">
             <h1> Projects </h1>
             <div className="project-section">
-              <div className="flex-item">
-              <h2> Snake </h2>
+              
+              <div className="grid-item">
+                 <h2> Rock-Paper-Scissors </h2> 
+                 <p>Rock Paper Scissors Game with a little twist</p>
+                <img src={secondProject} className="project-img" alt="rock-paper-scissors" />
               </div>
 
-              <div className="flex-item">
-              <h2> Rock-Paper-Scissors </h2>
+              
+              <div className="grid-item">
+                 <h2>Accessibility Portal</h2>
+                 <p> Designed for companies to help those with disabilities</p>
+                <img src={thirdProject} className="project-img" alt="accessibility-portal" />
               </div>
 
-              <div className="flex-item">
-              <h2>Accessibility Portal</h2>
-              </div>
-
-              <div className="flex-item">
-              <h2> Roman Numeral Converter</h2>
+          
+              <div className="grid-item">
+                <h2> Roman Numeral Converter</h2>
+                <p> Converts numbers from 1-100.</p>
+                <img src={firstProject} className="project-img" alt="roman numeral converter" />
               </div>
               </div>
           </div>
@@ -112,34 +123,49 @@ function App() {
 
               <div className="flex-item">  
               <h2> Problem Solving </h2>
+                <p className="p-text">Ability to diagnose problems and solve to best of ability</p>
               </div>
 
               <div className="flex-item">
               <h2> Technical </h2>
+                <p className="p-text">C++, C, HTML, CSS, PHP, JavaScript, Python, MySQL, Version Control, Frameworks: React.js, Node.js </p>
               </div>
 
               <div className="flex-item">
               <h2> Communication </h2>
+                <p className="p-text">Ability to express, take in, and communicate ideas and opinions. </p>
               </div>
 
               <div className="flex-item">
               <h2> Teamwork </h2>
+                <p className="p-text"> Ability to work with others on a team to achieve a common goal.</p>
               </div>
 
               <div className="flex-item">
               <h2> Website Design </h2>
+                <p className="p-text"> Ability to design a website, either through programming or using a website template service.</p>
               </div> 
 
               </div>
           </div>
 
-          <div ref={contact} className="contact-section">
+          <div ref={contact} className="fourth-section">
               <h1> Contact </h1>
-              
-              <div className="contact-items">
-                <h2> Email </h2>
-                <h2> LinkedIn </h2>
-              </div>
+              <div className="contact-section">
+                <div className="contact-items">
+                  <h2> Email: </h2>
+                      <FontAwesomeIcon icon={faEnvelope } className="font-icons" title="geary16.erua@gmail.com" />
+                  </div>
+                <div className="contact-items">
+                  <h2> LinkedIn </h2>
+                  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/geary-erua/"><FontAwesomeIcon icon={ faLinkedin } className="font-icons"/></a>
+                    {/* Insert image link here */}
+                  </div>
+                <div className="contact-items">
+                  <h2> Based: </h2>
+                    <FontAwesomeIcon icon={faEarthAmericas} className="font-icons" title="DFW Metroplex, TX, USA" />
+                </div>
+          </div>
           </div>
 
           </div>
