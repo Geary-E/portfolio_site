@@ -2,7 +2,7 @@
 import './App.css';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCopyright, faEnvelope, faCalculator, faHandScissors, faUniversalAccess, faAddressCard, faEarthAmericas,faCode, faC, faDatabase} from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faCalculator, faHandScissors, faUniversalAccess, faAddressCard, faEarthAmericas,faCode, faC, faDatabase} from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin, faHtml5, faCss3Alt, faJs, faReact, faPhp, faPython, faGithub, faTrello } from '@fortawesome/free-brands-svg-icons';
 import { useState, useEffect, useRef } from 'react';
 import Typewriter from 'typewriter-effect';
@@ -24,12 +24,23 @@ function App() {
 
 const [isDarkMode, setIsDarkMode] = useState(false);  // useState hook
 const [selectedItem, setSelectedItem] = useState(null); // another useState hook
+const [activeSection, setActiveSection] = useState(null); // another useState hook
 
+
+/*
 const [sendBtnColors, setSendBtnColors] = useState({
   backgroundColor: '',
   textColor: ''
-});
+}); */ 
 
+
+const toggleNav = () => {
+  const navBarList = document.querySelector(".navbar-list");
+    navBarList.classList.toggle('active');
+}; 
+
+
+/*
 useEffect(() => {
   const bodyColor = isDarkMode ? '#FFFFFF' : '#000000';
   const oppositeColor = findOppositeColor(bodyColor);
@@ -38,7 +49,7 @@ useEffect(() => {
     backgroundColor: oppositeColor,
     textColor: bodyColor
   });
-},[isDarkMode]);
+},[isDarkMode]); */
 
 useEffect(() => {
   localStorage.setItem('darkMode', JSON.stringify(isDarkMode))
@@ -60,13 +71,8 @@ const toggleDarkMode = () => {
 
 
 const findOppositeColor = (color) => {
-  // Check if the color starts with #, if it does, remove the # 
   const hexColor = color.charAt(0) === '#' ? color.substring(1) : color;
-  // Convert the hexadecimal color to decimal, apply XOR operation  with 0xFFFFFF, convert back to hexadecimal,
-  // and ensure the result has 6 characters by padding with '0' if needed
   const oppositeColor = (Number(`0x${hexColor}`) ^ 0xFFFFFF).toString(16).padStart(6, '0');
-
-    // Return the opposite color with '#' added at the beginning
     return `#${oppositeColor}`;
 };
 
@@ -110,7 +116,7 @@ const renderInformation = (item) => {
   }
 };
 
-/* Testing ... TESTING...TESTING...TESTING...TESTING */
+/* Sending emails through contact section */
 const form = useRef();
 
 const sendEmail = (e) => {
@@ -124,21 +130,25 @@ const sendEmail = (e) => {
         console.log(error.text);
     });
 };
-/* TESTING...TESTING...TESTING...TESTING...TESTING */
+
   return (
     <div className={`App ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
-    {/*<div className="App">*/}
       <div className="nav-bar">
         <ul className="navbar-list">
           <li> <div className="dark-mode-toggle" onClick={toggleDarkMode}>
-            {isDarkMode ? '🌙' : '☀️'} {/* 'Light' : 'Dark' */}
+            {isDarkMode ? '🌙' : '☀️'} 
           </div></li>
-          <li onClick={() => scroll(about)}>About</li>
-          <li onClick={() => scroll(projects)}> Projects</li>
-          <li onClick={() => scroll(skills)}> Skills </li>
-          <li onClick={() => scroll(contact)}> Contact </li>
+          <li onClick={() => { scroll(about); setActiveSection('about');}}
+          className={activeSection === 'about' ? 'active' : ''}>About</li>
+          <li onClick={() => { scroll(projects); setActiveSection('projects');}}
+          className={activeSection === 'projects' ? 'active' : ''}> Projects</li>
+          <li onClick={() => { scroll(skills); setActiveSection('skills');}} 
+          className={activeSection === 'skills' ? 'active' : ''}> Skills </li>
+          <li onClick={() => { scroll(contact); setActiveSection('contact');}} 
+          className={activeSection === 'contact' ?  'active' : ''}> Contact </li>
         </ul>
       </div>
+        <button className="burger-icon" onClick={toggleNav}>&#9776;</button>
 
       <div className="main-container">
         <FontAwesomeIcon className="home-image" icon={faCode}  />
@@ -161,12 +171,11 @@ const sendEmail = (e) => {
             <div className="about-section">
               <div className="left-side">
                 <select className={`about-list ${isDarkMode ? 'dark-mode' : 'light-mode'}`} onChange={(e) => listItemClick(e.target.value)}>
-                  <option value="" className="list-item"  style={{ '--hover-bgcolor': findOppositeColor(isDarkMode ? '#000000' : '#FFFFFF'),'--hover-color': isDarkMode ? '#000000' : '#FFFFFF' }}>Select an option</option> {/* To go back, change option tag to li */}
-                  <option value="Education" className="list-item"  style={{ '--hover-bgcolor': findOppositeColor(isDarkMode ? '#000000' : '#FFFFFF'),'--hover-color': isDarkMode ? '#000000' : '#FFFFFF' }}>Education </option> {/* To go back, change option tag to li */}
-                  <option value="Experience" className="list-item"  style={{ '--hover-bgcolor': findOppositeColor(isDarkMode ? '#000000' : '#FFFFFF'),'--hover-color': isDarkMode ? '#000000' : '#FFFFFF' }}>Experience </option> {/* To go back, change option tag to li */}
-                  <option value="Interests" className="list-item"  style={{ '--hover-bgcolor': findOppositeColor(isDarkMode ? '#000000' : '#FFFFFF'),'--hover-color': isDarkMode ? '#000000' : '#FFFFFF' }}>Interests </option> {/* To go back, change option tag to li */}
-                 {/* <li className="list-item"  style={{ '--hover-bgcolor': findOppositeColor(isDarkMode ? '#000000' : '#FFFFFF'),'--hover-color': isDarkMode ? '#000000' : '#FFFFFF'}} onClick={() => listItemClick('Interests')}> Interests <span className="addition"><FontAwesomeIcon icon={faPlus} /></span></li> */}
-                </select> {/* Previously ul and li */}
+                  <option value="" className="list-item"  style={{ '--hover-bgcolor': findOppositeColor(isDarkMode ? '#000000' : '#FFFFFF'),'--hover-color': isDarkMode ? '#000000' : '#FFFFFF' }}>Select an option</option> 
+                  <option value="Education" className="list-item"  style={{ '--hover-bgcolor': findOppositeColor(isDarkMode ? '#000000' : '#FFFFFF'),'--hover-color': isDarkMode ? '#000000' : '#FFFFFF' }}>Education </option> 
+                  <option value="Experience" className="list-item"  style={{ '--hover-bgcolor': findOppositeColor(isDarkMode ? '#000000' : '#FFFFFF'),'--hover-color': isDarkMode ? '#000000' : '#FFFFFF' }}>Experience </option> 
+                  <option value="Interests" className="list-item"  style={{ '--hover-bgcolor': findOppositeColor(isDarkMode ? '#000000' : '#FFFFFF'),'--hover-color': isDarkMode ? '#000000' : '#FFFFFF' }}>Interests </option> 
+                </select> 
                 {selectedItem && (
                   <div className="rendered-information">
                     {renderInformation(selectedItem)}
@@ -184,26 +193,23 @@ const sendEmail = (e) => {
             <div className="project-section">
               
               <div className="grid-item">
-               <h2> Accessibility Portal </h2>
+               <h2 className="grid-header"> Accessibility Portal </h2>
                  <FontAwesomeIcon className="project-icon" icon={faUniversalAccess} />
-                 {/*<p>Designed for companies to help those having problems with accessibilities on their company applications</p>*/}
-                 <p>Click <b><a className="project-link" href="https://github.com/Geary-E/Capstone-Project" target="_blank" rel="noopener noreferrer">here</a></b> to access project</p>
+                 <p>Click <b><a className="project-link" href="https://github.com/Geary-E/Capstone-Project" target="_blank" rel="noopener noreferrer">here</a></b> to view project</p>
               </div>
 
               
               <div className="grid-item">
-                <h2>Rock Paper Scissors</h2>
+                <h2 className="grid-header">Rock Paper Scissors</h2>
                 <FontAwesomeIcon className="project-icon" icon={faHandScissors} />
-                 {/*<p> Just a rock paper scissors game with a little twist</p>*/}
-                 <p>Click <b><a className="project-link" href="https://github.com/Geary-E/Rock_Paper_Scissors_Game" target="_blank" rel="noopener noreferrer">here</a></b> to access project</p>
+                 <p>Click <b><a className="project-link" href="https://github.com/Geary-E/Rock_Paper_Scissors_Game" target="_blank" rel="noopener noreferrer">here</a></b> to view project</p>
               </div>
 
           
               <div className="grid-item">
-                <h2> Roman Numeral Converter</h2>
+                <h2 className="grid-header"> Roman Numeral Converter</h2>
                 <FontAwesomeIcon className="project-icon" icon={faCalculator} />
-                {/*<p> A numeral converter converting numbers from 1-100.</p>*/}
-                <p>Click <b><a className="project-link" href="https://github.com/Geary-E/Roman_Numeral_Converter" target="_blank" rel="noopener noreferrer">here</a></b> to access project</p>  
+                <p>Click <b><a className="project-link" href="https://github.com/Geary-E/Roman_Numeral_Converter" target="_blank" rel="noopener noreferrer">here</a></b> to view project</p>  
               </div>
               </div>
           </div>
@@ -251,9 +257,9 @@ const sendEmail = (e) => {
                 <h5>Feel Free to Reach Out...</h5>
               <div className="contact-section">
                 <form ref={form} onSubmit={sendEmail}>
-                        <label for="name"><p className="label-text"> Name:</p><input placeholder="Name" className="input-box" type="text" name="name" /></label><br/>
-                        <label for="email"><p className="label-text">Email Address:</p><input placeholder="Email" className="input-box" type="email" name="email" /></label>
-                        <label for="message"><p className="label-text">Message:</p><textarea name="message" placeholder="Message"/></label><br/>
+                        <label htmlFor="name"><p className="label-text"> Name:</p><input placeholder="Name" className="input-box" type="text" name="name" /></label><br/>
+                        <label htmlFor="email"><p className="label-text">Email Address:</p><input placeholder="Email" className="input-box" type="email" name="email" /></label>
+                        <label htmlFor="message"><p className="label-text">Message:</p><textarea name="message" placeholder="Message"/></label><br/>
                         <button type="submit" className="form-btn"><p className="send">Send</p></button>
                   </form>
           </div>
@@ -261,10 +267,11 @@ const sendEmail = (e) => {
 
           <div className="footer">
             <div className="footer-items">
-            <h3><FontAwesomeIcon className="item" icon={faCopyright} /> Geary Erua 2024</h3>
-              <FontAwesomeIcon title="https://www.linkedin.com/in/geary-erua/" className="item" icon={faLinkedin} />
+            <h3>&copy;Geary Erua 2024</h3>
+              <a className="item-link" href="https://www.linkedin.com/in/geary-erua/" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon title="LinkedIn" className="item" icon={faLinkedin} /></a>
               <FontAwesomeIcon title="geary16.erua@gmail.com" className="item" icon={faEnvelope} />
-              <FontAwesomeIcon title="DFW, TX, USA" className="item" icon={faEarthAmericas} />
+              <FontAwesomeIcon title="Dallas/Fort Worth, TX, USA" className="item" icon={faEarthAmericas} />
             </div>
           </div>
 

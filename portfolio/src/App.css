@@ -1,5 +1,4 @@
 :root {
-  /* Testing */
   --body_background_light: white;
   --body_color_light: black;
   --body_background_dark: black;
@@ -10,16 +9,26 @@
   --hover_color_dark: black;
 }
 
-/* Testing */
-body[data-theme="light"], .about-list li:hover {
+
+body[data-theme="light"] {
   background-color: var(--body_background_light);
   color: var(--body_color_light);
 }
 
 /* Testing */
-body[data-theme="dark"], .about-list li:hover {
+body[data-theme="dark"] {
   background-color: var(--body_background_dark);
   color: var(--body_color_dark);
+}
+
+body[data-theme="light"] .navbar-list li.active {
+  background-color: var(--body_background_dark);
+  color: var(--body_color_dark);
+}
+
+body[data-theme="dark"] .navbar-list li.active {
+  background-color: var(--body_background_light);
+  color: var(--body_color_light);
 }
 
 
@@ -28,19 +37,25 @@ body[data-theme="dark"], .about-list li:hover {
   padding: 30px;
 }
 
+.burger-icon {
+  display: none;
+}
+
 .nav-bar {
- /* display: flex; */
-  /*flex-flow: row wrap;*/
- /* justify-content: center; */
-  /*align-items: flex-start;*/
   display: flex;
   justify-content: center;
+  position: fixed;  /* Test a hypothesis */
+  top: 0;
+  left: 0; 
+  width: 100%;
+  background-color: var(--body_background); 
+  z-index: 100;
+}
+
+.nav-bar.fixed {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  background-color: var(--body_background); /* Add background color to make it visible on the page - Test*/
-  z-index: 100; 
 }
 
 .navbar-list {
@@ -62,19 +77,13 @@ body[data-theme="dark"], .about-list li:hover {
   color: var(--body_background);
 }
 
-.navbar-list a {
-  padding: 15px;
-  display: inline;
-  text-decoration: none;
- /* color: white; */
-}
-
-.navbar-list a:hover {
+.navbar-list .active{
   background-color: var(--body_color);
   color: var(--body_background);
 }
 
 .main-container {
+  padding-top: 60px;  /* Recent addition */
   position: relative;
   height: 100vh;
 }
@@ -132,8 +141,6 @@ body[data-theme="dark"], .about-list li:hover {
 .about-section {
   padding: 20px;
   display: flex;
- /* flex-direction: row;
-  justify-content: center; */
 }
 
 .about-section h1 {
@@ -143,9 +150,6 @@ body[data-theme="dark"], .about-list li:hover {
 .left-side {
   flex: 1; 
   padding-right: 10px;
- /* flex: 50%;
-  width: 50%;
-  float: left; */ 
 }
 
 .about-list {
@@ -183,14 +187,11 @@ body[data-theme="dark"], .about-list li:hover {
 .project-section {
   padding: 20px;
   display: grid;
-  /*flex-flow: row wrap;
-  justify-content: center; */
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px 20px;
 }
 
 .grid-item {
- /* flex: 1; */
   padding: 15px;
   width: 100%;
   box-sizing: border-box;
@@ -249,6 +250,7 @@ textarea {
 .form-btn {
   display: flex;
   justify-content: flex-start;
+  margin-top: 5px;
   margin-left: 7.5rem;
   width: 15%;
   padding: 20px;
@@ -293,4 +295,102 @@ textarea {
   width: 25px;
   margin-left: 7px;
   margin-right: 7px;
+  cursor: pointer;
+}
+
+.item-link:link {
+  color: var(--hover_color); 
+}
+
+
+.item-link:visited {
+  color: var(--hover_color);
+}
+
+/* Making the application more responsive using RWD - responsive web design */
+@media screen and (max-width: 1200px) {
+  .home-image {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .nav-bar {  
+    position: absolute;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    background-color: var(--body_background); 
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+  } 
+
+  .navbar-list {
+    display: none; 
+    position: absolute; /* Recent addition */ 
+    top: 0;    
+    left: 0; 
+    width: 100%;  
+    background-color: var(--body_background); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Add a shadow for a dropdown effect */
+    /*transition: top 0.3s;*/
+    z-index: 1000; 
+  }
+  .navbar-list.active {
+    position: absolute; /* Recent additions */
+    top: 0; /* Recent additions */
+    left: 0; /* Recent additions */
+    display: flex; /* Show the navbar when it has the 'active' class */
+    flex-flow: column; /* Another recent addition */
+    background-color: var(--body_background); /* Recent addition */
+  }  
+  .burger-icon {
+    border: none;
+    font-size: 2.5rem;
+    background-color: var(--body_background);
+    color: var(--body_color);
+    margin: 10px;
+    display: block;
+    cursor: pointer;
+  }
+  .form-btn {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .project-section {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }  
+  .grid-item {
+    flex: 1;
+    padding: 20px;
+    margin-right: 15px;
+    width: 30%;
+  }
+  .grid-header {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .label-text {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main-container {
+    display: flex;
+    flex-flow: column wrap;
+  }
+  .home-image {
+    display: none;
+  }
 }
