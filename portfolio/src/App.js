@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faCalculator, faHandScissors, faUniversalAccess, faAddressCard, faEarthAmericas,faCode, faC, faDatabase} from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin, faHtml5, faCss3Alt, faJs, faReact, faPhp, faPython, faGithub, faTrello } from '@fortawesome/free-brands-svg-icons';
 import { useState, useEffect, useRef } from 'react';
-import Typewriter from 'typewriter-effect';
-import emailjs from '@emailjs/browser';
+import Typewriter from 'typewriter-effect'; // typewriter
+import emailjs from '@emailjs/browser'; // emailjs
 
 function App() {
   
@@ -15,9 +15,15 @@ function App() {
   const skills = useRef(null);
   const contact = useRef(null);
 
+  // For EmailJS
+  const service_id = process.env.REACT_APP_EMAIL_SERVICE;
+  const template_id = process.env.REACT_APP_EMAIL_TEMPLATE;
+  const public_key = process.env.REACT_APP_PUBLIC_KEY;
+  // For EmailJS end
+
   const scroll = (elementRef => {
     window.scrollTo({
-      top: elementRef.current.offsetTop - 50,
+      top: elementRef.current.offsetTop - 50, // originally - 50
       behavior: 'smooth',
     });
   });
@@ -27,12 +33,41 @@ const [selectedItem, setSelectedItem] = useState(null); // another useState hook
 const [activeSection, setActiveSection] = useState(null); // another useState hook
 
 
-/*
-const [sendBtnColors, setSendBtnColors] = useState({
-  backgroundColor: '',
-  textColor: ''
-}); */ 
+/* Use of Intesection Observer API */
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.85
+};
 
+const observerCallback = (entries) => {
+  entries.forEach((entry) => {
+    if(entry.isIntersecting) {
+      setActiveSection(entry.target.className); // originally id
+    }
+  });
+};
+
+const aboutObserver = useRef(new IntersectionObserver(observerCallback, observerOptions));
+const projectsObserver = useRef(new IntersectionObserver(observerCallback, observerOptions));
+const skillsObserver = useRef(new IntersectionObserver(observerCallback, observerOptions));
+const contactObserver = useRef(new IntersectionObserver(observerCallback, observerOptions));
+
+useEffect(() => {
+  aboutObserver.current.observe(about.current);
+  projectsObserver.current.observe(projects.current);
+  skillsObserver.current.observe(skills.current);
+  contactObserver.current.observe(contact.current);
+
+  return () => {
+    aboutObserver.current.disconnect();
+    projectsObserver.current.disconnect();
+    skillsObserver.current.disconnect();
+    contactObserver.current.disconnect();
+  };
+}, [about, projects, skills, contact]);
+
+/* Intersection Observer API implementation end */
 
 const toggleNav = () => {
   const navBarList = document.querySelector(".navbar-list");
@@ -40,34 +75,22 @@ const toggleNav = () => {
 }; 
 
 
-/*
-useEffect(() => {
-  const bodyColor = isDarkMode ? '#FFFFFF' : '#000000';
-  const oppositeColor = findOppositeColor(bodyColor);
+/* Local storage implemented for dark mode use */
+const toggleDarkMode = () => { 
+  const newMode = !isDarkMode;  // new addition - test
+  setIsDarkMode(newMode);
+  document.body.setAttribute('data-theme', newMode ? 'dark' : 'light'); // recent addition
+  localStorage.setItem('darkMode', JSON.stringify(newMode)); // Save the preference to local storage - Recent addition
+};
 
-  setSendBtnColors({
-    backgroundColor: oppositeColor,
-    textColor: bodyColor
-  });
-},[isDarkMode]); */
-
-useEffect(() => {
-  localStorage.setItem('darkMode', JSON.stringify(isDarkMode))
-}, [isDarkMode]);
 
 useEffect(() => {
   const darkMode = JSON.parse(localStorage.getItem('darkMode'));
-  if(darkMode) {
+  if(darkMode !== null) {
     setIsDarkMode(darkMode);
+    document.body.setAttribute('data-theme', darkMode ? 'dark' : 'light');
   }
-}, []);
-
-
-//const darkMode = () => {
-const toggleDarkMode = () => {
-  setIsDarkMode(!isDarkMode);
-  document.body.setAttribute('data-theme', isDarkMode ? 'light' : 'dark');
-};
+}, []); /* Local storage implementation end */
 
 
 const findOppositeColor = (color) => {
@@ -104,11 +127,12 @@ const renderInformation = (item) => {
       case 'Interests':
         return ( 
           <div className="dropdown-content">
-            <p>Beyond academia and profession, I'm a passionate sports enthusiast,
-               particularly devoted to supporting the Dallas Mavericks in the vibrant
-              Dallas/Fort Worth area, with my love for the team extending beyond the game
-              and serving as a source of community and shared enthusiasm, shaping a well-rounded
-              individual ready to contribute meaningfully to the dynamic world of technology.</p>
+            <p> Beyond academia and profession,
+               my passion for the local Dallas Mavericks NBA team extends beyond the game,
+                serving as a source of community and shared enthusiasm. 
+                This, along with my love for sports, contributes to my
+                 well-rounded nature, ready to meaningfully contribute to the
+                  dynamic world of technology.</p>
               </div>
             );
       default:
@@ -122,10 +146,11 @@ const form = useRef();
 const sendEmail = (e) => {
   e.preventDefault();
 
-  emailjs.sendForm('service_2lemxgm', 'contact_form', form.current, 'M4c0hQsq1fDJLThn0')
+  emailjs.sendForm(service_id, template_id, form.current, public_key)
     .then((result) => {
         console.log(result.text);
         console.log("message sent");
+        alert("Message Sent!")
     }, (error) => {
         console.log(error.text);
     });
@@ -133,22 +158,23 @@ const sendEmail = (e) => {
 
   return (
     <div className={`App ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
+    {/* Navigation bar */}
       <div className="nav-bar">
         <ul className="navbar-list">
           <li> <div className="dark-mode-toggle" onClick={toggleDarkMode}>
             {isDarkMode ? '🌙' : '☀️'} 
           </div></li>
-          <li onClick={() => { scroll(about); setActiveSection('about');}}
+          <li id="about" onClick={() => { scroll(about); setActiveSection('about');}} /* Recent additions: added id */
           className={activeSection === 'about' ? 'active' : ''}>About</li>
-          <li onClick={() => { scroll(projects); setActiveSection('projects');}}
+          <li id="projects" onClick={() => { scroll(projects); setActiveSection('projects');}}
           className={activeSection === 'projects' ? 'active' : ''}> Projects</li>
-          <li onClick={() => { scroll(skills); setActiveSection('skills');}} 
+          <li id="skills" onClick={() => { scroll(skills); setActiveSection('skills');}} 
           className={activeSection === 'skills' ? 'active' : ''}> Skills </li>
-          <li onClick={() => { scroll(contact); setActiveSection('contact');}} 
+          <li id="contact" onClick={() => { scroll(contact); setActiveSection('contact');}} 
           className={activeSection === 'contact' ?  'active' : ''}> Contact </li>
         </ul>
-      </div>
-        <button className="burger-icon" onClick={toggleNav}>&#9776;</button>
+      </div>{/* Navigation bar end */}
+        <button className="burger-icon" onClick={toggleNav}>&#9776;</button> {/* Burger menu */}
 
       <div className="main-container">
         <FontAwesomeIcon className="home-image" icon={faCode}  />
@@ -164,7 +190,7 @@ const sendEmail = (e) => {
 /></i></p></div>
       </div><br/><br/>
 
-      <div className="sections">
+      <div className="sections"> {/* The different sections of the page */}
         
         <div ref={about} className="first-section">
          <h1> About </h1>
@@ -219,7 +245,7 @@ const sendEmail = (e) => {
               <div className="skills-section">
 
               <div className="flex-item">  
-              <h2> Front End </h2>
+              <h2 id="front-end"> Front End </h2>
                 <p className="p-text">HTML, CSS, JavaScript, React.js</p>
                 <FontAwesomeIcon className="font-icons bounce-animation2" icon={faHtml5} />
                 <FontAwesomeIcon className="font-icons bounce-animation2" icon={faCss3Alt} />
@@ -228,7 +254,7 @@ const sendEmail = (e) => {
               </div>
 
               <div className="flex-item">
-              <h2> Back End </h2>
+              <h2 id="back-end"> Back End </h2>
                 <p className="p-text">C/C++, PHP, Python </p>
                 <FontAwesomeIcon className="font-icons bounce-animation2" icon={faC} />
                 <FontAwesomeIcon className="font-icons bounce-animation2" icon={faPhp} />
@@ -236,13 +262,13 @@ const sendEmail = (e) => {
               </div>
 
               <div className="flex-item">
-              <h2> Database </h2>
+              <h2 id="db"> Database </h2>
                 <p className="p-text">MySQL </p>
                 <FontAwesomeIcon className="font-icons bounce-animation2" icon={faDatabase} />
               </div>
 
               <div className="flex-item">
-              <h2> Project Management </h2>
+              <h2 id="proj"> Project Management </h2>
                 <p className="p-text"> GitHub, Trello </p>
                 <FontAwesomeIcon className="font-icons bounce-animation2" icon={faGithub} />
                 <FontAwesomeIcon className="font-icons bounce-animation2" icon={faTrello} />
@@ -265,7 +291,7 @@ const sendEmail = (e) => {
           </div>
           </div><br/><br />
 
-          <div className="footer">
+          <div className="footer"> {/* Footer */}
             <div className="footer-items">
             <h3>&copy;Geary Erua 2024</h3>
               <a className="item-link" href="https://www.linkedin.com/in/geary-erua/" target="_blank" rel="noopener noreferrer">

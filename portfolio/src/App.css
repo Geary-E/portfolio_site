@@ -77,7 +77,7 @@ body[data-theme="dark"] .navbar-list li.active {
   color: var(--body_background);
 }
 
-.navbar-list .active{
+.navbar-list li.active{
   background-color: var(--body_color);
   color: var(--body_background);
 }
@@ -305,6 +305,12 @@ textarea {
 
 .item-link:visited {
   color: var(--hover_color);
+}
+
+@media screen and (max-width: 300px) {
+  #db, #front-end, #back-end, #proj {
+    display: none;
+  }
 }
 
 /* Making the application more responsive using RWD - responsive web design */
