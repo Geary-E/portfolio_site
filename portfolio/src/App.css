@@ -82,6 +82,21 @@ body[data-theme="dark"] .navbar-list li.active {
   color: var(--body_background);
 }
 
+.nav-bar-link {
+  color: var(--body_background);
+  text-decoration: none;
+}
+
+.nav-bar-link:hover {
+  background-color: var(--body_color);
+  color: var(--body_background);
+}
+
+.nav-bar-link.active {
+  background-color: var(--body_color);
+  color: var(--body_background);
+}
+
 .main-container {
   padding-top: 60px;  /* Recent addition */
   position: relative;
@@ -199,11 +214,11 @@ body[data-theme="dark"] .navbar-list li.active {
 
 .project-link:link {
   text-decoration: none;
-  color: var(--hover_color); 
+  color: var(--body_color); 
 }
 
 .project-link:visited {
-  color: var(--hover_color);
+  color: var(--body_color);
 }
 
 .skills-section {
@@ -299,12 +314,12 @@ textarea {
 }
 
 .item-link:link {
-  color: var(--hover_color); 
+  color: var(--body_color); 
 }
 
 
 .item-link:visited {
-  color: var(--hover_color);
+  color: var(--body_color);
 }
 
 @media screen and (max-width: 300px) {

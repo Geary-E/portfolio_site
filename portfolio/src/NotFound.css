@@ -1,0 +1,31 @@
+:root {
+    --body_background_light: white;
+    --body_color_light: black;
+    --body_background_dark: black; 
+    --body_color_dark: white;
+    --hover_bgcolor_light: black;
+    --hover_bgcolor_dark: white;
+    --hover_color_light: white;
+    --hover_color_dark: black; 
+  }
+  
+  
+  body[data-theme="light"] {
+    background-color: var(--body_background_light);
+    color: var(--body_color_light); 
+  }
+  
+  /* Testing */
+  body[data-theme="dark"] {
+    background-color: var(--body_background_dark);
+    color: var(--body_color_dark); 
+  }
+
+  .not-found {
+    text-align: center;
+    padding: 30px;
+  }
+
+  .top-header {
+    font-size: 2.90em;
+  }
