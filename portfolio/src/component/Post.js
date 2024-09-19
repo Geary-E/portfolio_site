@@ -68,14 +68,17 @@ const Post = () => {
            
             <div className="comment-section">    
                 <h2 className="comment-header">Comments...</h2>
+                <div className="add-comment">
+                        <NavLink className="nav-bar-link" to={`/post/${post.id}/add_comment/`}> Add Comment </NavLink><br/><br/>
+                        </div>
                 {  comments.length === 0 ? (
                     <div>
                         No Comments Yet... <a href="#"> Add One </a>
                     </div>
                  ) : (
-                    comments.map((comment, index) => (
+                     comments.map((comment, index) => (
                         <div key={index} className="comment">
-                            <NavLink className="nav-bar-link" to={`/post/${post.id}/add_comment/`}> Add Comment </NavLink><br/><br/>
+                           {/* <NavLink className="nav-bar-link" to={`/post/${post.id}/add_comment/`}> Add Comment </NavLink><br/><br/> */}
                             <strong>
                                 <div className="user-name">{comment.user}: </div> </strong>
                                 <p>{comment.message}</p>
