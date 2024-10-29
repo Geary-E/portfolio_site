@@ -68,6 +68,8 @@ const Post = () => {
            
             <div className="comment-section">    
                 <h2 className="comment-header">Comments...</h2>
+                <h4> Login or register <b>here</b> to like, comment, or reply.</h4>
+                <br/>
                 <div className="add-comment">
                         <NavLink className="nav-bar-link" to={`/post/${post.id}/add_comment/`}> Add Comment </NavLink><br/><br/>
                         </div>
