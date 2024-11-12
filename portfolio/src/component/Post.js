@@ -4,7 +4,9 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import { useParams, NavLink } from 'react-router-dom';
 import { DarkModeContext } from '../DarkModeContext'; // DARK MODE
+import RegisteredUsers from './RegisterUsers';
 import '../Post.css'; // .css file for Post
+import '../Modal.css'; // .css file for Modal - Test run
 
 const Post = () => {
 
@@ -13,6 +15,8 @@ const Post = () => {
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
     const [likes, setLikes] = useState(0);
+    const [modal, setModal] = useState(false);
+   // const [overlay, setOverlay] = useState(false);  // trial run
 
     useEffect(() => {
         fetchPost();
@@ -59,6 +63,27 @@ const Post = () => {
         }        
     };
 
+   /* let myStyles = { 
+        display: 'block' 
+       /* z-index: '2', */
+   /* }; */   
+
+    const openModal = () => {
+        setModal(true);
+       // myStyles.display = 'block';
+        console.log(`Modal: ${modal}`);
+        if(modal) {
+            console.log("Registered Users is showing...");
+        } 
+    }
+
+    const closedModal = () => {     // trial run...
+        setModal(false);
+       // myStyles.display = 'none';
+        console.log(`Modal: ${modal}`);
+        console.log('Modal is closing...'); // trial run
+    }   // trial run ... 
+
     return (
         <div className={`post-section ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
             <h1 className="post-title">{post.title}</h1>
@@ -68,8 +93,18 @@ const Post = () => {
            
             <div className="comment-section">    
                 <h2 className="comment-header">Comments...</h2>
-                <h4> Login or register <b>here</b> to like, comment, or reply.</h4>
+                <h4> Login or register <b><button className="login-btn" onClick={openModal}> here </button></b> to like, comment, or reply.</h4>
                 <br/>
+                {/*modal && (
+                    <RegisteredUsers className="modal-visible" closeModal={closedModal} /> 
+                )*/}
+                {/* modal ? (
+                    myStyles.display = 'block'
+                ) : 
+                (
+                    myStyles.display = 'none'
+                )*/}
+                <RegisteredUsers className={modal ? 'modal-visible' : 'modal-invisible'} closeModal={closedModal}/> {/* style={myStyles}}: Trial run */} 
                 <div className="add-comment">
                         <NavLink className="nav-bar-link" to={`/post/${post.id}/add_comment/`}> Add Comment </NavLink><br/><br/>
                         </div>

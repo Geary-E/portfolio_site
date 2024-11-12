@@ -76,3 +76,20 @@
  .heart {
   cursor: pointer;
  }
+
+ .login-btn {
+  cursor: pointer;
+  background-color: var(--body_background);
+  color:  var(--body_color);
+  border: none;
+ }
+ /* Trial run...*/
+ /* Hide modal when the class is not applied */
+/*.registeredUsers {
+  display: none;
+}*/
+
+/* Show modal only when modal-visible class is present */
+/*.modal-visible {
+  display: block;
+}*/

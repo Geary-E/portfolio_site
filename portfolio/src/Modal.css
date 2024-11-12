@@ -1,0 +1,10 @@
+ /* Trial run...*/
+ /* Hide modal when the class is not applied */
+ .modal-invisible {
+    display: none;
+  }
+  
+  /* Show modal only when modal-visible class is present */
+  .modal-visible {
+    display: block;
+  }
