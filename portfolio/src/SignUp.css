@@ -1,0 +1,73 @@
+ /* Trial run...*/
+ /* Hide modal when the class is not applied */
+ :root {
+    --body_background_light: white;
+    --body_color_light: black;
+    --body_background_dark: black;
+    --body_color_dark: white;
+    --hover_bgcolor_light: black;
+    --hover_bgcolor_dark: white;
+    --hover_color_light: white;
+    --hover_color_dark: black;
+  }
+  
+  
+  body[data-theme="light"] {
+    background-color: var(--body_background_light);
+    color: var(--body_color_light);
+  }
+  
+  /* Testing */
+  body[data-theme="dark"] {
+    background-color: var(--body_background_dark);
+    color: var(--body_color_dark);
+  }
+
+ /* * {
+    box-sizing: border-box;
+  } */
+
+  .signup-page {
+    margin: auto;
+  }
+
+  .signup-section {
+    margin: 100px auto auto auto;
+    padding: 25px;
+    width: 80%;
+  }
+
+  .name-signup, .pass-signup {
+    width: 80%;
+    height: 25%;
+    font-size: 15px;
+  }
+
+  .signup-submit {
+    cursor: pointer;  /* test run */
+    margin: auto;     /* test run */
+    width: 80%;       /* test run */
+    height: 30%;      /* test run */
+    padding: 15px;    /* test run */
+    font-size: 15px;
+  }
+
+  .signup-submit.dark { /* test run */
+    background-color: white;
+    color: black;
+  }
+
+  .signup-submit.dark:hover {   /* test run */
+    background-color: black;
+    color: white;
+  }
+
+  .signup-submit.light {      /* test run */
+    background-color: black;
+    color: white;
+  }
+
+  .signup-submit.light:hover {    /* test run */
+    background-color: white;
+    color: black;
+  }

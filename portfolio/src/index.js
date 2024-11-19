@@ -6,6 +6,7 @@ import App from './App';
 import Blog from './component/Blog';
 import Post from './component/Post';
 import Comment from './component/Comment';
+import SignUp from './component/SignUp'
 import reportWebVitals from './reportWebVitals';
 import { DarkModeProvider } from './DarkModeContext'; // Import the provider - TEST
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
 { path: '/:post/:id/add_comment', // route for individual post
   element: <Comment />
 },
+{
+  path: '/signup',  // trial run
+  element: <SignUp />   // trial run
+}
 ]); // recent addition
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
