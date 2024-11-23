@@ -37,7 +37,7 @@
     width: 80%;
   }
 
-  .name-signup, .pass-signup {
+  .name-signup, .user-signup, .pass-signup {
     width: 80%;
     height: 25%;
     font-size: 15px;

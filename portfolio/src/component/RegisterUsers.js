@@ -13,7 +13,7 @@ const RegisterUsers = ({ closeModal, className }) => {    // prop: {style, close
             <div className={`modal-container ${isDarkMode ? 'dark-mode' : 'light-mode'}`}> 
                 <span className="close" onClick={closeModal}>&times;</span> 
                 <h2> Login: </h2><br/>
-                <input className="user" placeholder="Email Address" /><br/><br/>
+                <input className="user" placeholder="Username" /><br/><br/>
                 <input className="password" placeholder="Password" /> <br/><br/>
                 <button className="submit-btn"> Submit </button><br/>
                 <p> New here? Click <NavLink to={`/signup`}>here</NavLink> to sign up</p>
