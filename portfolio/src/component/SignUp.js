@@ -1,11 +1,18 @@
 import React, {useState, useContext} from 'react';
 import { NavLink } from 'react-router-dom';
 import { DarkModeContext } from '../DarkModeContext'; // DARK MODE
+import axios from 'axios';  // axios library
 import '../SignUp.css';
 
 const SignUp = () => {
 
     const { isDarkMode } = useContext(DarkModeContext); // dark mode
+    //const [data, setData] = useState([]);   // useState for data
+
+    //const submit = () => {
+
+      //  axios.post()
+    //}
 
     return (
         <div className={`signup-page ${isDarkMode ? 'dark mode' : 'light mode '}`}>

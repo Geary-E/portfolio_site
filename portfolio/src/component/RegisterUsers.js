@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react';
 import { NavLink } from 'react-router-dom';
 import { DarkModeContext } from '../DarkModeContext'; // DARK MODE
 //import SignUp from './SignUp';
+import axios from 'axios';  // axios library
 import '../Modal.css'; // .css file for Modal - Test run
 
 const RegisterUsers = ({ closeModal, className }) => {    // prop: {style, closed} // testRun

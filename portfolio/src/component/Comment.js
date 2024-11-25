@@ -12,7 +12,7 @@ const Comment  = () => {
     const { isDarkMode } = useContext(DarkModeContext);
     const { id } = useParams();
     const [data, setData] = useState({
-        user: "",
+       // user: "", : Trial run
         message: ""
     }); 
 
@@ -43,7 +43,7 @@ const Comment  = () => {
 
         const commentData = {
            // id: commentData.id,
-            user: data.user,
+           // user: data.user, : Trial run
             message: data.message
         }; 
 
@@ -73,15 +73,16 @@ const Comment  = () => {
         <div className={`add-comment ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
           <form onSubmit={handleSubmit} method="POST">  
             <h1 className="comment-header"> Add Comment </h1>
-            <label> 
+            {/* <label> 
                  Username: <br /><br />
-                <input className="username" type="text" name="user" value={data.user} placeholder="username" onChange={handleChange} /> {/*commentData.user */}
-            </label><br /><br />
+                <input className="username" type="text" name="user" value={data.user} placeholder="username" onChange={handleChange} /> 
+            </label><br /> */}
+            <br />
 
             <label> 
                 Message: <br /><br />
                 <textarea name="message" placeholder="message" value={data.message} onChange={handleChange} /> {/*commentData.message */}
-            </label><br /><br />
+            </label><br /><br /><br/>
 
             <button className="submit"> Submit </button>
            </form> 
