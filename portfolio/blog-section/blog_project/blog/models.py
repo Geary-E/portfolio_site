@@ -1,6 +1,17 @@
 from django.db import models
 
-# Create your models here. # This is a test---- This is just a test001: This is just a test
+# Create your models here. 
+
+
+#def get_default_user():     #testing...testing
+ #   user = User.objects.first() # first user in database
+
+  #  if user is None:
+   #     created_user = User.objects.create_user(email='test@test.com', user_name='default_test', password='test1234')
+
+   # return user.id
+
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -24,7 +35,7 @@ class Comment(models.Model):
     message = models.TextField()
     date_of_comment = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE) # trial run
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default=1) # trial run: Testing...testing
 
     def __str__(self):
         return self.message
