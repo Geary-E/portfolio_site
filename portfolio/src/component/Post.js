@@ -25,7 +25,7 @@ const Post = () => {
 
     const fetchPost = async () => {
         try {
-            const response = await axios.get(`https://blog-section-21b15676b1be.herokuapp.com/api/posts/${id}/`);
+            const response = await axios.get(`https://blog-section2-301885cf5d53.herokuapp.com//api/posts/${id}/`);
             setPost(response.data);
         } catch(error) {
             console.error('There was an error fetching the blog post!', error);
@@ -36,7 +36,7 @@ const Post = () => {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`https://blog-section-21b15676b1be.herokuapp.com/api/posts/${id}/comments/`);
+            const response = await axios.get(`https://blog-section2-301885cf5d53.herokuapp.com//api/posts/${id}/comments/`);
             setComments(response.data);
         } catch(error) {
             console.error('There was an error fetching the comments!', error);
@@ -95,15 +95,6 @@ const Post = () => {
                 <h2 className="comment-header">Comments...</h2>
                 <h4> Login or register <b><button className="login-btn" onClick={openModal}> here </button></b> to like, comment, or reply.</h4>
                 <br/>
-                {/*modal && (
-                    <RegisteredUsers className="modal-visible" closeModal={closedModal} /> 
-                )*/}
-                {/* modal ? (
-                    myStyles.display = 'block'
-                ) : 
-                (
-                    myStyles.display = 'none'
-                )*/}
                 <RegisteredUsers className={modal ? 'modal-visible' : 'modal-invisible'} closeModal={closedModal}/> {/* style={myStyles}}: Trial run */} 
                 <div className="add-comment">
                         <NavLink className="nav-bar-link" to={`/post/${post.id}/add_comment/`}> Add Comment </NavLink><br/><br/>

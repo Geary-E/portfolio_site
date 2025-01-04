@@ -6,10 +6,10 @@ from django.db import models
 #def get_default_user():     #testing...testing
  #   user = User.objects.first() # first user in database
 
-  #  if user is None:
-   #     created_user = User.objects.create_user(email='test@test.com', user_name='default_test', password='test1234')
+#    if user is None:
+ #       created_user = User.objects.create_user(email='test@test.com', user_name='default', password='test1234')
 
-   # return user.id
+  #  return user.id
 
 
 class Post(models.Model):
@@ -21,7 +21,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-class User(models.Model):
+class User(models.Model):  # Formerly User --- testing testing testing
     email = models.CharField(max_length=200)
     user_name = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
@@ -32,10 +32,10 @@ class User(models.Model):
       
 class Comment(models.Model):
     #user = models.CharField(max_length=200) : Trial run
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     message = models.TextField()
     date_of_comment = models.DateTimeField(auto_now_add=True)
-    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE,default=1) # trial run: Testing...testing
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.message

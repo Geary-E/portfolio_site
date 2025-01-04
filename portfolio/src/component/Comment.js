@@ -13,6 +13,7 @@ const Comment  = () => {
     const { id } = useParams();
     const [data, setData] = useState({
        // user: "", : Trial run
+      // user: "",    // trial run--most recent
         message: ""
     }); 
 
@@ -42,8 +43,8 @@ const Comment  = () => {
        // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
         const commentData = {
-           // id: commentData.id,
-           // user: data.user, : Trial run
+           //id: commentData.id,
+           // user: data.user,  // trial run---most recent 
             message: data.message
         }; 
 
@@ -51,7 +52,7 @@ const Comment  = () => {
         console.log('Submitting data:', commentData);
        // console.log('CSRF Token:', csrfToken);
 
-        axios.post(`https://blog-section-21b15676b1be.herokuapp.com/api/posts/${id}/comments/create/`, commentData)
+        axios.post(`https://blog-section2-301885cf5d53.herokuapp.com//api/posts/${id}/comments/create/`, commentData)
         .then((response) => {
             console.log(response);
             alert("Comment created!");

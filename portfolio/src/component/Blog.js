@@ -14,7 +14,7 @@ const Blog = () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await axios.get('https://blog-section-21b15676b1be.herokuapp.com/api/posts/');
+            const response = await axios.get('https://blog-section2-301885cf5d53.herokuapp.com//api/posts/');
             setPosts(response.data);
         } 
         catch(error) {
