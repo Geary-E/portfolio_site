@@ -52,7 +52,7 @@ const Comment  = () => {
         console.log('Submitting data:', commentData);
        // console.log('CSRF Token:', csrfToken);
 
-        axios.post(`https://blog-section2-301885cf5d53.herokuapp.com//api/posts/${id}/comments/create/`, commentData)
+        axios.post(`https://blog-section2-301885cf5d53.herokuapp.com/api/posts/${id}/comments/create/`, commentData)
         .then((response) => {
             console.log(response);
             alert("Comment created!");

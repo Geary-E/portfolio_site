@@ -25,7 +25,7 @@ const Post = () => {
 
     const fetchPost = async () => {
         try {
-            const response = await axios.get(`https://blog-section2-301885cf5d53.herokuapp.com//api/posts/${id}/`);
+            const response = await axios.get(`https://blog-section2-301885cf5d53.herokuapp.com/api/posts/${id}/`);
             setPost(response.data);
         } catch(error) {
             console.error('There was an error fetching the blog post!', error);
@@ -36,7 +36,7 @@ const Post = () => {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`https://blog-section2-301885cf5d53.herokuapp.com//api/posts/${id}/comments/`);
+            const response = await axios.get(`https://blog-section2-301885cf5d53.herokuapp.com/api/posts/${id}/comments/`);
             setComments(response.data);
         } catch(error) {
             console.error('There was an error fetching the comments!', error);
