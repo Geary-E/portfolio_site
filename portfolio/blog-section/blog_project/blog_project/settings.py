@@ -37,19 +37,22 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',   # whitenoise
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # recent addition
+    #'corsheaders.middleware.CorsMiddleware',  # recent addition
 ]
-CORS_ALLOW_ALL_ORIGINS = True
+#CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 CSRF_TRUSTED_ORIGINS = [
-     "http://localhost:8000",
+     "http://localhost:3000",
+     "http://localhost:8000", # testing
+     "https://blog-section2--301885cf5d53.herokuapp.com", # testing
 ]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_HTTPONLY = True

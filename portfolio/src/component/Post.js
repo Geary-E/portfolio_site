@@ -14,6 +14,7 @@ const Post = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
+    const [user, setUser] = useState([]);   // testing...testing...testing(1/4/25)
     const [likes, setLikes] = useState(0);
     const [modal, setModal] = useState(false);
    // const [overlay, setOverlay] = useState(false);  // trial run
@@ -21,7 +22,13 @@ const Post = () => {
     useEffect(() => {
         fetchPost();
         fetchComments();
+        fetchUsers();   // testing...testing - 1/5/2025
     }, []);
+
+    useEffect(() => {
+        console.log("Comments:", comments);
+        console.log("Users:", user);
+    }, [comments, user]);
 
     const fetchPost = async () => {
         try {
@@ -43,6 +50,17 @@ const Post = () => {
             console.error('Error details:', error.response || error.message);
         }
     };
+
+   
+    const fetchUsers = async () => {    // test - 1/5/2025
+        try {
+            const response = await axios.get('https://blog-section2-301885cf5d53.herokuapp.com/api/users/');
+            setUser(response.data);
+        } catch(error) {
+            console.error('There was an error fetching the users!', error);
+            console.error('Error details:', error.response || error.message);
+        }
+    } 
 
     if(!post) {
         return <div>Loading...</div>;
@@ -84,6 +102,8 @@ const Post = () => {
         console.log('Modal is closing...'); // trial run
     }   // trial run ... 
 
+
+
     return (
         <div className={`post-section ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
             <h1 className="post-title">{post.title}</h1>
@@ -104,19 +124,34 @@ const Post = () => {
                         No Comments Yet... <a href="#"> Add One </a>
                     </div>
                  ) : (
-                     comments.map((comment, index) => (
-                        <div key={index} className="comment">
-                           {/* <NavLink className="nav-bar-link" to={`/post/${post.id}/add_comment/`}> Add Comment </NavLink><br/><br/> */}
-                            <strong>
-                                <div className="user-name">{comment.user}: </div> </strong>
+                     comments.map((comment, index) => {
+
+                        console.log("User array: ", user);  // test
+                        
+                        const userLookup = user.reduce((map, u) => {
+                            map[u.id] = u.user_name;
+                            return map;
+                        }, {}); 
+
+                        //console.log("UserLookup: ", JSON.stringify(userLookup, null, 2));    // testing
+                        console.log("Comment username: ", comment.user);
+
+                        return (
+                            <div key={index} className="comment">
+                                {/* console.log(comment) */}
+                                {/* <NavLink className="nav-bar-link" to={`/post/${post.id}/add_comment/`}> Add Comment </NavLink><br/><br/> */}
+                                <strong>
+                                    <div className="user-name">{userLookup[comment.user] || "Unknown user"}: </div> 
+                                    </strong> {/* comment.user */}
                                 <p>{comment.message}</p>
                                 <p> {new Date(comment.date_of_comment).toLocaleString()} </p>
                                 <div className="button-list">
-                                    <FontAwesomeIcon icon={faHeart} className="heart" id="heart-1" onClick={likesButton}> Like </FontAwesomeIcon>
-                                    <button> Reply</button>
+                                <FontAwesomeIcon icon={faHeart} className="heart" id="heart-1" onClick={likesButton}> Like </FontAwesomeIcon>
+                                <button> Reply</button>
                                 </div>
                             </div>
-                 ))
+                        );
+})
                 )}
 
             </div>
