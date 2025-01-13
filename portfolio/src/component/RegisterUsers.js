@@ -27,7 +27,7 @@ const RegisterUsers = ({ closeModal, className }) => {
         }
 
         try {
-            const response = await axios.post("http://localhost:8000/api/login/", values, {
+            const response = await axios.post("https://blog-section2-301885cf5d53.herokuapp.com/api/login/", values, {
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrfToken,
