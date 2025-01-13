@@ -14,15 +14,15 @@ const Post = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
-    const [user, setUser] = useState([]);   // testing...testing...testing(1/4/25)
+    const [user, setUser] = useState([]);   
     const [likes, setLikes] = useState(0);
     const [modal, setModal] = useState(false);
-   // const [overlay, setOverlay] = useState(false);  // trial run
+   
 
     useEffect(() => {
         fetchPost();
         fetchComments();
-        fetchUsers();   // testing...testing - 1/5/2025
+        fetchUsers();   
     }, []);
 
     useEffect(() => {
@@ -52,7 +52,7 @@ const Post = () => {
     };
 
    
-    const fetchUsers = async () => {    // test - 1/5/2025
+    const fetchUsers = async () => {    // fetch users function
         try {
             const response = await axios.get('https://blog-section2-301885cf5d53.herokuapp.com/api/users/');
             setUser(response.data);
@@ -67,8 +67,6 @@ const Post = () => {
     } 
 
     const likesButton = () => {
-        //setLikes(1);
-        //console.log("You got a new like!");
         if(!likes) {
             document.getElementById("heart-1").style.color = "red";
             setLikes(1);

@@ -35,11 +35,11 @@ const SignUp = () => {
                 <form onSubmit={handleSubmit} method="POST">
                     <h1> Create Your Account </h1>
                     <label>Email </label><br/><br/>
-                    <input className="name-signup" name="email" onChange={handleInput}  placeholder="Email" /><br/><br/>
+                    <input className="name-signup" name="email" onChange={handleInput}  placeholder="Email" required /><br/><br/>
                     <label>Username </label><br/><br/>
-                    <input className="user-signup" name="user_name" onChange={handleInput}  placeholder="Username" /><br/><br/>
+                    <input className="user-signup" name="user_name" onChange={handleInput}  placeholder="Username" required /><br/><br/>
                     <label>Password</label><br/><br/>
-                    <input className="pass-signup" name="password" onChange={handleInput}  placeholder="Password" /><br/><br/><br/>
+                    <input className="pass-signup" type="password" name="password" onChange={handleInput}  placeholder="Password" required /><br/><br/><br/>
                     <button className={`signup-submit ${isDarkMode ? 'dark' : 'light'}`}> Create Account </button>
                  </form>   
             </div>

@@ -64,5 +64,25 @@ class UserList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#testing...user login authentication in Django(1/12/2025)
+#@csrf_exempt
+def login_user(request):
+     if request.method == "POST":
+        import json
+        data = json.loads(request.body)
+
+        user_name = data.get('user_name')
+        password = data.get('password')
+
+        try:
+            user = User.objects.get(user_name=user_name)
+            if user.password == password:
+                return JsonResponse({"message": "Login successful!", "user_id": user.id}, status=200)
+            else:
+                return JsonResponse({"message": "Invalid credentials"}, status=401)
+        except User.DoesNotExist:
+            return JsonResponse({"message": "User not found"}, status=404)
+
+     return JsonResponse({"message": "Invalid request"}, status=400)                      
+
  
-         

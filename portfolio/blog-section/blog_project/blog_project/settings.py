@@ -56,7 +56,7 @@ CSRF_TRUSTED_ORIGINS = [
      "https://blog-section2--301885cf5d53.herokuapp.com", # testing
 ]
 CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = False # test run
 ROOT_URLCONF = 'blog_project.urls'
 TEMPLATES = [
     {
