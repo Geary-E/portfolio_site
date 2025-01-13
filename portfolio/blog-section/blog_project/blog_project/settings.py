@@ -53,6 +53,7 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
      "http://localhost:3000",
      "http://localhost:8000", # testing
+     "https://portfolio-site-eta-sepia.vercel.app", # testing
      "https://blog-section2--301885cf5d53.herokuapp.com", # testing
 ]
 CORS_ALLOW_CREDENTIALS = True
