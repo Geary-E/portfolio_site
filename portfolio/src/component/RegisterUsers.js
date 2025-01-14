@@ -35,7 +35,8 @@ const RegisterUsers = ({ closeModal, className }) => {
                 withCredentials: true,
             });
             console.log(response.data);
-            console.log("Login successful!")
+            alert("Login successful!");
+            //console.log("Login successful!")
         } catch (error) {
             console.error(error);
             alert("Login failed. Please check your credentials.");

@@ -57,7 +57,7 @@ CSRF_TRUSTED_ORIGINS = [
      "https://blog-section2--301885cf5d53.herokuapp.com", # testing
 ]
 CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_HTTPONLY = False # test run
+CSRF_COOKIE_HTTPONLY = False # test run: Originally false
 ROOT_URLCONF = 'blog_project.urls'
 TEMPLATES = [
     {
@@ -139,8 +139,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 HOST_SCHEME                     = "http://"
 SECURE_PROXY_SSL_HEADER         = None
 SECURE_SSL_REDIRECT             = False
-SESSION_COOKIE_SECURE           = False
-CSRF_COOKIE_SECURE              = False
+SESSION_COOKIE_SECURE           = True
+CSRF_COOKIE_SECURE              = True
 SECURE_HSTS_SECONDS             = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
 SECURE_FRAME_DENY               = False
+CSRF_COOKIE_SAMESITE = "None"       # test: 1/13/2025
+SESSION_COOKIE_SAMESITE = "None"    # test: 1/13/2025
