@@ -36,8 +36,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   # whitenoise
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # whitenoise
+    #'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -56,7 +57,7 @@ CSRF_TRUSTED_ORIGINS = [
      "http://localhost:3000",
      "http://localhost:8000", # testing
      "https://portfolio-site-eta-sepia.vercel.app", # testing
-     "https://blog-section2--301885cf5d53.herokuapp.com", # testing
+     "https://blog-section2-301885cf5d53.herokuapp.com", # testing
 ]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_HTTPONLY = False # test run: Originally false

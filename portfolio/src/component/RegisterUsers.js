@@ -7,7 +7,7 @@ import '../Modal.css'; // .css file for Modal - Test run
 
 const RegisterUsers = ({ closeModal, className }) => {    
     const { isDarkMode } = useContext(DarkModeContext); // dark mode
-    
+    const csrfToken = Cookies.get("csrftoken"); // CSRF token
 
    const [values, setValues] = useState({   // values for password
         user_name: "",
@@ -20,7 +20,7 @@ const RegisterUsers = ({ closeModal, className }) => {
 
    const handleSubmit = async (event) => {  // handle form submit function
         event.preventDefault(); 
-        const csrfToken = Cookies.get("csrftoken"); // CSRF token
+        //const csrfToken = Cookies.get("csrftoken"); // CSRF token
         if (!csrfToken) {
             console.error("CSRF token not found in cookies.");
             return;

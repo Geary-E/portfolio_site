@@ -15,5 +15,5 @@ urlpatterns = [
     path('posts/<int:pk>/comments/create/', views.CommentCreate.as_view(), name='comment-create'), # new line addition
     path('users/', UserList.as_view(), name='user-list'),   # testing...1/5/2025
     path('login/', login_user, name='login'),   #testing...1/12/2025
-    path('api/get-csrf-token/', get_csrf_token, name='get_csrf_token'),
+    path('get-csrf-token/', get_csrf_token, name='get_csrf_token'),
 ]
