@@ -46,18 +46,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'corsheaders.middleware.CorsMiddleware',  # recent addition
 ]
-#CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://portfolio-site-eta-sepia.vercel.app",
-    "http://localhost:8000",    # testing
-    "https://blog-section2--301885cf5d53.herokuapp.com", # testing
+   # "http://localhost:8000",    # testing
+   # "https://blog-section2--301885cf5d53.herokuapp.com", # testing
 ]
 CSRF_TRUSTED_ORIGINS = [
      "http://localhost:3000",
-     "http://localhost:8000", # testing
      "https://portfolio-site-eta-sepia.vercel.app", # testing
-     "https://blog-section2-301885cf5d53.herokuapp.com", # testing
+    # "http://localhost:8000", # testing
+    # "https://blog-section2-301885cf5d53.herokuapp.com", # testing
 ]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_HTTPONLY = False # test run: Originally false

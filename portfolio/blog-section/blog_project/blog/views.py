@@ -9,7 +9,7 @@ from .serializers import PostSerializer, CommentSerializer, UserSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response 
 from django.middleware.csrf import get_token
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from rest_framework.parsers import JSONParser
 
 # Create your views here.
@@ -83,6 +83,9 @@ def login_user(request):
         except User.DoesNotExist:
             return JsonResponse({"message": "User not found"}, status=404)
 
-     return JsonResponse({"message": "Invalid request"}, status=400)                      
+     return JsonResponse({"message": "Invalid request"}, status=400)   
+
+def test_csrf(request):
+    return JsonResponse({"message": "CSRF cookie set"})                        
 
  

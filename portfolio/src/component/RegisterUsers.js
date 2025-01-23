@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { NavLink } from 'react-router-dom';
 import { DarkModeContext } from '../DarkModeContext'; // DARK MODE
 import axios from 'axios';  // axios library
@@ -7,7 +7,24 @@ import '../Modal.css'; // .css file for Modal - Test run
 
 const RegisterUsers = ({ closeModal, className }) => {    
     const { isDarkMode } = useContext(DarkModeContext); // dark mode
-    const csrfToken = Cookies.get("csrftoken"); // CSRF token
+    //const csrfToken = Cookies.get("csrftoken"); // CSRF token
+    //console.log("CSRF token: ", csrfToken);
+    /* Testing */
+    const fetchCSRFToken = async () => {
+        try {
+            const response = await axios.get(
+                "https://blog-section2-301885cf5d53.herokuapp.com/api/get-csrf-token/",
+                { withCredentials: true }
+            );
+            console.log("CSRF token fetched:", response.data.csrfToken);
+        } catch (error) {
+            console.error("Error fetching CSRF token:", error);
+        }
+    };
+    
+    useEffect(() => {
+        fetchCSRFToken();
+    }, []); /* Testing end */
 
    const [values, setValues] = useState({   // values for password
         user_name: "",
@@ -20,7 +37,8 @@ const RegisterUsers = ({ closeModal, className }) => {
 
    const handleSubmit = async (event) => {  // handle form submit function
         event.preventDefault(); 
-        //const csrfToken = Cookies.get("csrftoken"); // CSRF token
+        const csrfToken = Cookies.get("csrftoken"); // CSRF token
+        console.log("CSRF token: ", csrfToken); // testing
         if (!csrfToken) {
             console.error("CSRF token not found in cookies.");
             return;
@@ -49,7 +67,7 @@ const RegisterUsers = ({ closeModal, className }) => {
             
             <div id="main" className={className}> {/* style={modalStyles} */} 
             <div className={`modal-container ${isDarkMode ? 'dark-mode' : 'light-mode'}`}> 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} method="POST">
                     <span className="close" onClick={closeModal}>&times;</span> 
                     <h2> Login: </h2><br/>
                     <input className="user" name="user_name" value={values.user_name} placeholder="Username" onChange={handleChange} required /><br/><br/>
