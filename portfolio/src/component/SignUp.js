@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react';
 import { NavLink } from 'react-router-dom';
 import { DarkModeContext } from '../DarkModeContext'; // DARK MODE
 import axios from 'axios';  // axios library
+import axiosInstance from '../axiosInstance';
 import '../SignUp.css';
 
 const SignUp = () => {
@@ -21,7 +22,7 @@ const SignUp = () => {
    const handleSubmit = (event) => {
     event.preventDefault();
     //console.log(data);  //testing purposes
-    axios.post("https://blog-section2-301885cf5d53.herokuapp.com/api/users/", data)
+    axiosInstance.post("api/users/", data)
     .then(response => {
         console.log(response);
         alert("User created!");

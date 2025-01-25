@@ -17,9 +17,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-m4)wcdl57we8uvx#^yaafpk!d&h3!$f^n11nzd=dd$q@m1q*(!'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True # testing...testing
 #ALLOWED_HOSTS = ['localhost', '127.0.0.1'] # recent additions
 ALLOWED_HOSTS = ['*']
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -34,31 +35,32 @@ INSTALLED_APPS = [
     'blog',
 ]
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',   # whitenoise
-    #'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'corsheaders.middleware.CorsMiddleware',  # recent addition
 ]
+
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://portfolio-site-eta-sepia.vercel.app",
-   # "http://localhost:8000",    # testing
-   # "https://blog-section2--301885cf5d53.herokuapp.com", # testing
+    "https://blog-section2-301885cf5d53.herokuapp.com", # testing
 ]
 CSRF_TRUSTED_ORIGINS = [
      "http://localhost:3000",
      "https://portfolio-site-eta-sepia.vercel.app", # testing
-    # "http://localhost:8000", # testing
-    # "https://blog-section2-301885cf5d53.herokuapp.com", # testing
+     "http://localhost:8000", # local backend
+     "https://blog-section2-301885cf5d53.herokuapp.com", # deployment backend
 ]
+
+
 CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_HTTPONLY = False # test run: Originally false
 ROOT_URLCONF = 'blog_project.urls'

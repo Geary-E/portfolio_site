@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useParams, NavLink } from 'react-router-dom';
 import { DarkModeContext } from '../DarkModeContext'; // DARK MODE
 import RegisteredUsers from './RegisterUsers';
+import axiosInstance from '../axiosInstance';
 import '../Post.css'; // .css file for Post
 import '../Modal.css'; // .css file for Modal - Test run
 
@@ -32,7 +33,7 @@ const Post = () => {
 
     const fetchPost = async () => {
         try {
-            const response = await axios.get(`https://blog-section2-301885cf5d53.herokuapp.com/api/posts/${id}/`);
+            const response = await axiosInstance.get(`api/posts/${id}/`);
             setPost(response.data);
         } catch(error) {
             console.error('There was an error fetching the blog post!', error);
@@ -43,7 +44,7 @@ const Post = () => {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`https://blog-section2-301885cf5d53.herokuapp.com/api/posts/${id}/comments/`);
+            const response = await axiosInstance.get(`api/posts/${id}/comments/`);
             setComments(response.data);
         } catch(error) {
             console.error('There was an error fetching the comments!', error);
@@ -54,7 +55,7 @@ const Post = () => {
    
     const fetchUsers = async () => {    // fetch users function
         try {
-            const response = await axios.get('https://blog-section2-301885cf5d53.herokuapp.com/api/users/');
+            const response = await axiosInstance.get('api/users/');
             setUser(response.data);
         } catch(error) {
             console.error('There was an error fetching the users!', error);

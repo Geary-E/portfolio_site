@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { DarkModeContext } from '../DarkModeContext'; // DARK MODE
 import axios from 'axios';  // axios library
 import Cookies from 'js-cookie';    // JS-Cookie
+import axiosInstance from '../axiosInstance';
 import '../Modal.css'; // .css file for Modal - Test run
 
 const RegisterUsers = ({ closeModal, className }) => {    
@@ -12,8 +13,8 @@ const RegisterUsers = ({ closeModal, className }) => {
     /* Testing */
     const fetchCSRFToken = async () => {
         try {
-            const response = await axios.get(
-                "https://blog-section2-301885cf5d53.herokuapp.com/api/get-csrf-token/",
+            const response = await axiosInstance.get(
+                "api/get-csrf-token/",
                 { withCredentials: true }
             );
             console.log("CSRF token fetched:", response.data.csrfToken);
@@ -45,7 +46,7 @@ const RegisterUsers = ({ closeModal, className }) => {
         }
 
         try {
-            const response = await axios.post("https://blog-section2-301885cf5d53.herokuapp.com/api/login/", values, {
+            const response = await axiosInstance.post("api/login/", values, {
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrfToken,

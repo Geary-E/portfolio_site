@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { DarkModeContext } from '../DarkModeContext'; // DARK MODE
 import axios from 'axios';
+import axiosInstance from '../axiosInstance';
 //import getCsrfToken from '../getCsrfToken';
 import '../Comment.css'; // .css file for Comment
 // http://localhost:8000/api/posts/${id}/comments/
@@ -52,7 +53,7 @@ const Comment  = () => {
         console.log('Submitting data:', commentData);
        // console.log('CSRF Token:', csrfToken);
 
-        axios.post(`https://blog-section2-301885cf5d53.herokuapp.com/api/posts/${id}/comments/create/`, commentData)
+        axiosInstance.post(`api/posts/${id}/comments/create/`, commentData)
         .then((response) => {
             console.log(response);
             alert("Comment created!");

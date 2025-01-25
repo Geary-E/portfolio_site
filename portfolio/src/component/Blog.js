@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import '../Blog.css';
 import { Link } from 'react-router-dom';
+import axiosInstance from '../axiosInstance';
 import { DarkModeContext } from '../DarkModeContext'; // DARK MODE
 
 const Blog = () => {
@@ -14,12 +15,18 @@ const Blog = () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await axios.get('https://blog-section2-301885cf5d53.herokuapp.com/api/posts/');
+            const response = await axiosInstance.get('api/posts/');
             setPosts(response.data);
         } 
         catch(error) {
-            console.error('There was an error fetching the blog posts!', error);
+            if (error.response) {
+                console.error('Server responded with an error:', error.response.data, error.response.status);
+            } else if (error.request) {
+                console.error('No response received from the server:', error.request);
+            } else {
+                console.error('Error setting up request:', error.message);
         }
+    }
     };
 
     const formatDate = (dateString) => {
