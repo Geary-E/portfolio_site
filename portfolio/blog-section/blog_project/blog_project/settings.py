@@ -47,12 +47,14 @@ MIDDLEWARE = [
 ]
 
 
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:8000",
     "https://portfolio-site-eta-sepia.vercel.app",
     "https://blog-section2-301885cf5d53.herokuapp.com", # testing
 ]
+
+
 CSRF_TRUSTED_ORIGINS = [
      "http://localhost:3000",
      "https://portfolio-site-eta-sepia.vercel.app", # testing
@@ -62,7 +64,13 @@ CSRF_TRUSTED_ORIGINS = [
 
 
 CORS_ALLOW_CREDENTIALS = True
+#CSRF_COOKIE_NAME = "csrfToken"
 CSRF_COOKIE_HTTPONLY = False # test run: Originally false
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SAMESITE = "None"
+
 ROOT_URLCONF = 'blog_project.urls'
 TEMPLATES = [
     {
@@ -144,10 +152,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 HOST_SCHEME                     = "http://"
 SECURE_PROXY_SSL_HEADER         = None
 SECURE_SSL_REDIRECT             = False
-SESSION_COOKIE_SECURE           = True
-CSRF_COOKIE_SECURE              = True
 SECURE_HSTS_SECONDS             = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
 SECURE_FRAME_DENY               = False
-CSRF_COOKIE_SAMESITE = "None"       # test: 1/13/2025
-SESSION_COOKIE_SAMESITE = "None"    # test: 1/13/2025

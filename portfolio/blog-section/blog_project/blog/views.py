@@ -65,7 +65,6 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 #testing...user login authentication in Django(1/12/2025)
-#@csrf_exempt
 def login_user(request):
      if request.method == "POST":
         import json

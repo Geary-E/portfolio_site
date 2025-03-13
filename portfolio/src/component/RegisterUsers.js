@@ -8,15 +8,23 @@ import '../Modal.css'; // .css file for Modal - Test run
 
 const RegisterUsers = ({ closeModal, className }) => {    
     const { isDarkMode } = useContext(DarkModeContext); // dark mode
+    const [csrfToken, setCSRFToken] = useState("");
     //const csrfToken = Cookies.get("csrftoken"); // CSRF token
     //console.log("CSRF token: ", csrfToken);
     /* Testing */
+
+   // const csrfToken1 = document.cookie
+   // .split('; ')
+   // .find((row) => row.startsWith('csrfToken='))
+   // ?.split('=')[1];
+   // console.log("CSRF-Token1: ", csrfToken1);    // Testing
+
     const fetchCSRFToken = async () => {
         try {
             const response = await axiosInstance.get(
                 "api/get-csrf-token/",
-                { withCredentials: true }
             );
+            setCSRFToken(response.data.csrfToken);
             console.log("CSRF token fetched:", response.data.csrfToken);
         } catch (error) {
             console.error("Error fetching CSRF token:", error);
@@ -38,8 +46,9 @@ const RegisterUsers = ({ closeModal, className }) => {
 
    const handleSubmit = async (event) => {  // handle form submit function
         event.preventDefault(); 
-        const csrfToken = Cookies.get("csrftoken"); // CSRF token
-        console.log("CSRF token: ", csrfToken); // testing
+       // const csrfToken = Cookies.get("csrftoken"); // CSRF token
+       //const csrfToken = csrfToken1; 
+       console.log("CSRF token: ", csrfToken); // testing
         if (!csrfToken) {
             console.error("CSRF token not found in cookies.");
             return;
@@ -72,7 +81,7 @@ const RegisterUsers = ({ closeModal, className }) => {
                     <span className="close" onClick={closeModal}>&times;</span> 
                     <h2> Login: </h2><br/>
                     <input className="user" name="user_name" value={values.user_name} placeholder="Username" onChange={handleChange} required /><br/><br/>
-                    <input className="password" type="password" name="password" value={values.password} placeholder="Password" onChange={handleChange} required /> <br/><br/>
+                    <input className="password" name="password" type="password"  value={values.password} placeholder="Password" onChange={handleChange} required /> <br/><br/>
                     <button className="submit-btn"> Submit </button><br/>
                     <p> New here? Click <NavLink to={`/signup`}>here</NavLink> to sign up</p>
                     </form>
